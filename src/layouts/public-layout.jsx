@@ -2,6 +2,7 @@ import React from 'react'
 import Routes from '../routes'
 import styled from 'styled-components'
 import Clock from '../components/common/clock'
+import ViewedUsers from './../components/common/viewed-users';
 
 const Container = styled.div`
   margin: auto;
@@ -25,6 +26,7 @@ const PublicLayout = () => {
       </Main>
       <Sidebar>
         <Clock />
+        <ViewedUsers />
       </Sidebar>
     </Container>
   )
