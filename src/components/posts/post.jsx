@@ -1,5 +1,6 @@
 import React, { useMemo, useState, useEffect } from 'react'
 import styled from 'styled-components';
+import moment from 'moment'
 
 const PostItem = styled.div`
 padding: 1rem;
@@ -37,7 +38,7 @@ line-height: 1.5;
 
 const Post = ({ title, created_at, body }) => {
   return <PostItem>
-    <PostTitle>{created_at}</PostTitle>
+    <PostTitle>{moment(created_at).format('DD/MM/YYYY hh:mm')}</PostTitle>
     <PostDate>{title}</PostDate>
     <PostDescription>{body}</PostDescription>
   </PostItem>
