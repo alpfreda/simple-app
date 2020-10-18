@@ -21,7 +21,7 @@ const routes = [
   },
   {
     key: 'posts',
-    path: '/posts/{userId}',
+    path: '/posts/:userId',
     component: Posts
   },
   {

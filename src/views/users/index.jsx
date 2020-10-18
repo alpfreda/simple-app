@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import List from '../../components/users/list'
-import UserBreadcrumb from '../../components/users/breadcrumb'
+import UsersBreadcrumb from '../../components/users/breadcrumb'
 
 const Container = styled.div`
   margin: auto;
@@ -10,7 +10,7 @@ const Container = styled.div`
 
 const Index = () => {
   return <>
-    <UserBreadcrumb />
+    <UsersBreadcrumb />
     <List />
   </>
 }

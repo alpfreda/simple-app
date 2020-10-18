@@ -1,11 +1,11 @@
 import React from 'react'
 import Routes from '../routes'
 import styled from 'styled-components'
-import Clock from '../components/clock'
+import Clock from '../components/common/clock'
 
 const Container = styled.div`
   margin: auto;
-  max-width:70rem;
+  max-width:80rem;
   display:flex;
 `
 
