@@ -5,7 +5,7 @@ import moment from 'moment'
 const ClockWrapper =  styled.div`
 padding: 0.5rem 1rem;
 letter-spacing: 1px;
-color: #3F51B5;
+color: #40916c;
 margin-top: 1rem;
 margin: 1rem auto;
 text-align: center;

@@ -42,9 +42,9 @@ justify-content: center;
 font-size: 0.8rem;
 
   &:hover {
-    border-color: #3F51B5;
+    border-color: #40916c;
     color:#fff;
-    background:#3F51B5;
+    background:#40916c;
   }
 `
 
