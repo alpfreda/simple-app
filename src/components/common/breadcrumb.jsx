@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Items = styled.ol`
-  margin: 0;
+  margin:1rem 0 0;
   padding-left: 0;
   list-style: none;
   display: flex;;
@@ -35,16 +35,23 @@ const ItemLink = styled(NavLink).attrs({ exact: true })`
   }
 `
 
-const BreadcrumbItem = ({ children, to, ...props }) => (
-    <Item {...props}>
-        <ItemLink to={to}>{children}</ItemLink>
-    </Item>
+
+const ItemCurrent = styled.span`
+  color: #777;
+`
+
+const BreadcrumbItem = ({ children, to, current, ...props }) => (
+  <Item {...props}>
+    {
+      current ? <ItemCurrent>{children}</ItemCurrent> : <ItemLink to={to}>{children}</ItemLink>
+    }
+  </Item>
 )
 
 const Breadcrumb = ({ children }) => (
-    <nav aria-label="Breadcrumb">
-        <Items>{children}</Items>
-    </nav>
+  <nav aria-label="Breadcrumb">
+    <Items>{children}</Items>
+  </nav>
 )
 
 
