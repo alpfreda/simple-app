@@ -6,8 +6,20 @@ import { Subject } from 'rxjs'
 const PaginationWrapper = styled.div`
 display: flex;
 justify-content:flex-end;
-margin-top:1rem
+margin:1rem 0;
 `
+
+const PaginationInfo = styled.div`
+display: flex;
+align-items: center;
+margin-right: auto;
+background: #f5f5f5;
+padding: 0 0.6rem;
+font-size: 0.9rem;
+border-radius: 1rem;
+line-height: 1;
+`
+
 const PaginationInner = styled.ul`
 list-style: none;
 display: inline-flex;
@@ -35,7 +47,12 @@ const Pagination = ({ pages = 0, initialPage = 0, pageChanged }) => {
     const [current, setCurrent] = useState(initialPage)
     const [onChange$] = useState(() => new Subject())
     const pageNumbers = []
-    for (let i = 1; i <= Math.min(pages, 10); i++) {
+    let maxSize = current + 10
+    while (maxSize > pages) {
+        maxSize--;
+    }
+
+    for (let i = Math.max(1, maxSize - 12); i <= maxSize; i++) {
         pageNumbers.push(i)
     }
 
@@ -56,15 +73,19 @@ const Pagination = ({ pages = 0, initialPage = 0, pageChanged }) => {
             {pageNumber}
         </PaginationItem>
     ))
-    return (
-        <PaginationWrapper>
+    return (<>
+        { (pages > 0) && <PaginationWrapper>
+            <PaginationInfo>
+                {current} from {pages} pages
+            </PaginationInfo>
             <PaginationInner>
-                <PaginationItem className='previous'>«</PaginationItem>
+                <PaginationItem onClick={() => { handleChange(1) }} className='previous'>«</PaginationItem>
                 {renderPageNumbers}
-                <PaginationItem className='next'>»</PaginationItem>
+                <PaginationItem onClick={() => { handleChange(pages) }} className='next'>»</PaginationItem>
             </PaginationInner>
         </PaginationWrapper>
-    )
+        }
+    </>)
 }
 
 export default Pagination
