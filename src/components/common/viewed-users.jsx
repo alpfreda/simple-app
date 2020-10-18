@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
+import { NavLink } from 'react-router-dom'
 
 const UserViewedWrapper = styled.div`
 padding: 1rem 1rem 0;
@@ -28,15 +29,23 @@ margin: 4px;
 flex: 0 1 calc(70% - 4px);
 `
 
-const UserButton = styled.div`
+
+const UserButton = styled(NavLink).attrs({ exact: true })`
 margin: 4px;
 flex: 0 1 calc(30% - 4px);
-border: 1px solid #ddd;
+border: 1px solid #eee;
+background:#f5f5f5;
 border-radius: 0.3rem;
 display: flex;
 align-items: center;
 justify-content: center;
 font-size: 0.8rem;
+
+  &:hover {
+    border-color: #3F51B5;
+    color:#fff;
+    background:#3F51B5;
+  }
 `
 
 const UserName = styled.div`
@@ -46,7 +55,6 @@ margin-bottom: 0.5rem;
 `
 
 const UserEmail = styled.div`
-color: #3f51c3;
 font-size:0.8rem;
 `
 
@@ -67,8 +75,8 @@ const ViewedUsers = props => {
             <UserEmail>{user.email}</UserEmail>
             <UserGender>{user.gender}</UserGender>
           </UserContent>
-          <UserButton>
-            View More
+          <UserButton to={{ pathname: `/posts/${user.id}` }}>
+            View Posts
           </UserButton>
         </UserItem>
       })

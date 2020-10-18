@@ -6,7 +6,7 @@ import ViewedUsers from './../components/common/viewed-users';
 
 const Container = styled.div`
   margin: auto;
-  max-width:80rem;
+  width:80rem;
   display:flex;
 `
 

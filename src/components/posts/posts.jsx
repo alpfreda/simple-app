@@ -17,10 +17,15 @@ display:flex;
 margin-top:1rem;
 `
 const Posts = ({ userId }) => {
-  const [{ user, isLoading: userIsLoading, isError: userIsError }] = useUserApi(`https://gorest.co.in/public-api/users/${userId}`, null);
-  const [{ list, isLoading, isError }] = usePostsApi(`https://gorest.co.in/public-api/users/${userId}/posts`, []);
+  const [{ user, isLoading: userIsLoading, isError: userIsError }, doFetchUser] = useUserApi(`https://gorest.co.in/public-api/users/${userId}`, null);
+  const [{ list, isLoading, isError }, doFetchPosts] = usePostsApi(`https://gorest.co.in/public-api/users/${userId}/posts`, []);
 
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    doFetchUser(`https://gorest.co.in/public-api/users/${userId}`)
+    doFetchPosts(`https://gorest.co.in/public-api/users/${userId}/posts`)
+  }, [userId])
 
   useEffect(() => {
     if (user) {
