@@ -3,16 +3,16 @@ import axios from 'axios'
 
 const dataFetchReducer = (state, action) => {
   switch (action.type) {
-    case 'FETCH_INIT':
+    case 'POSTS_FETCH_INIT':
       return {...state, isLoading: true, isError: false}
-    case 'FETCH_SUCCESS':
+    case 'POSTS_FETCH_SUCCESS':
       return {
         ...state,
         isLoading: false,
         isError: false,
-        ...action.payload,
+        list: action.payload.data,
       }
-    case 'FETCH_FAILURE':
+    case 'POSTS_FETCH_FAILURE':
       return {
         ...state,
         isLoading: false,
@@ -23,29 +23,26 @@ const dataFetchReducer = (state, action) => {
   }
 }
 
-const useDataApi = (initialUrl, initialData) => {
+const usePostsApi = (initialUrl, initialData) => {
   const [url, setUrl] = useState(initialUrl)
 
   const [state, dispatch] = useReducer(dataFetchReducer, {
     isLoading: false,
     isError: false,
-    data: initialData,
+    list: initialData,
   })
 
   useEffect(() => {
     const fetchData = async () => {
-      dispatch({type: 'FETCH_INIT'})
+      dispatch({type: 'POSTS_FETCH_INIT'})
       try {
         const {data: res} = await axios(url)
         dispatch({
-          type: 'FETCH_SUCCESS',
-          payload: {
-            data: res.data,
-            pagination: res.meta.pagination,
-          },
+          type: 'POSTS_FETCH_SUCCESS',
+          payload: res,
         })
       } catch (error) {
-        dispatch({type: 'FETCH_FAILURE'})
+        dispatch({type: 'POSTS_FETCH_FAILURE'})
       }
     }
     fetchData()
@@ -54,4 +51,4 @@ const useDataApi = (initialUrl, initialData) => {
   return [state, setUrl]
 }
 
-export {useDataApi}
+export {usePostsApi}

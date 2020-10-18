@@ -1,6 +1,4 @@
 import React, { useMemo, useState, useEffect } from 'react'
-import Loader from '../common/loader'
-import { useDataApi } from './api'
 import styled from 'styled-components';
 
 const PostItem = styled.div`

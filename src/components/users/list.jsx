@@ -2,7 +2,7 @@ import React, { useMemo, useState, useEffect } from 'react'
 import DataTable, { createTheme } from 'react-data-table-component'
 import Search from './search'
 import Pagination from '../common/pagination'
-import { useDataApi } from './api'
+import { useUsersApi } from '../../services/users-api'
 import Loader from '../common/loader'
 import { Link } from 'react-router-dom'
 
@@ -25,7 +25,7 @@ createTheme('solarized', {
 
 const List = () => {
     const [{ page, filter }, setChange] = useState({ page: 1, filter: '' })
-    const [{ data, pagination, isLoading, isError }, doFetch] = useDataApi(`https://gorest.co.in/public-api/users?name=${filter}&page=${page}`, []);
+    const [{ list, pagination, isLoading, isError }, doFetch] = useUsersApi(`https://gorest.co.in/public-api/users?name=${filter}&page=${page}`, []);
 
     const columns = useMemo(() => [
         {
@@ -67,7 +67,7 @@ const List = () => {
         {isLoading ? <Loader /> : <>
             <DataTable
                 columns={columns}
-                data={data}
+                data={list}
                 noHeader={true}
                 fixedHeader
                 fixedHeaderScrollHeight='27rem'
